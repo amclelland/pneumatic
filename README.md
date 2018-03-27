@@ -12,5 +12,5 @@ A tube is a queue that stores your individual links (capsules). Create a tube th
 
 * Add user accounts
 * Finish implementing clipboard.js
-* Better front-end for adding tubes/capsules
+* Mobile friendly
 * YouTube previews
