@@ -1,5 +1,18 @@
-<%= link_to new_tube_path, class: 'new-tube-icon' do %>
-  <%= icon 'fas', 'plus-circle' %><span>New Tube</span>
+<% unless @tubes.length >= 4 %>
+  <div class="new-tube">
+    <%= link_to '#', class: 'new-tube-icon', data: { turbolinks: false } do %>
+      <%= icon 'fas', 'plus-circle' %><span>New Tube</span>
+    <% end %>
+
+    <%= form_for Tube.new, html: { class: 'hidden', id: 'new-tube-form' } do |f| %>
+      <%= f.text_field :name, placeholder: 'Name' %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="new-tube">
+    <p>Maximum tubes reached (4)</p>
+  </div>
 <% end %>
 
 <br />
@@ -9,6 +22,10 @@
     <div class="<%= @width %> columns tube">
       <h3 class="name">
         <%= tube.name %>
+        
+        <%= link_to tube_path(tube), method: :delete, data: { confirm: "Are you sure you want to delete #{tube.name}?"} do %>
+          <%= icon 'fas', 'times' %>
+        <% end %>
       </h3>
       
       <% if tube.capsules.blank? %>
@@ -18,7 +35,12 @@
           <tbody>
             <% tube.capsules.each do |capsule| %>
               <tr class="capsule">
-                <td class="url"><%= link_to capsule.url, capsule.url %></td>
+                <td class="url"><input type="text" value="<%= capsule.url %>" /></td>
+                <td class="action">
+                  <%= link_to capsule.url, target: '_blank' do %>
+                    <%= icon 'fas', 'link' %>
+                  <% end %>
+                </td>
                 <td class="action"><%= icon 'fas', 'copy' %></td>
                 <td class="action">
                   <%= link_to tube_capsule_path(tube, capsule), method: :delete do %>
@@ -31,8 +53,13 @@
         </table>
       <% end %>
       
-      <%= link_to new_tube_capsule_path(tube), class: 'new-capsule-icon' do %>
+      <%= link_to '#', class: 'new-capsule-icon', data: { tube: tube.id, turbolinks: false } do %>
         <%= icon 'fas', 'plus-circle' %><span>New Capsule</span>
+      <% end %>
+      
+      <%= form_for [tube, Capsule.new], html: { class: 'hidden', data: { tube: tube.id } } do |f| %>
+        <%= f.text_field :url, placeholder: 'Link URL' %>
+        <%= f.submit %>
       <% end %>
     </div>
   <% end %>

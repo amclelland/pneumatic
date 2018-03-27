@@ -20,6 +20,13 @@ class TubesController < ApplicationController
     end
   end
   
+  def destroy
+    @tube = Tube.find(params[:id])
+    @tube.destroy
+    
+    redirect_to root_path
+  end
+  
   private
   
   def tube_params
