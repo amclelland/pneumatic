@@ -1,0 +1,39 @@
+<%= link_to new_tube_path, class: 'new-tube-icon' do %>
+  <%= icon 'fas', 'plus-circle' %><span>New Tube</span>
+<% end %>
+
+<br />
+
+<div class="row tubes">
+  <% @tubes.each do |tube| %>
+    <div class="<%= @width %> columns tube">
+      <h3 class="name">
+        <%= tube.name %>
+      </h3>
+      
+      <% if tube.capsules.blank? %>
+        <p>No capsules for this tube</p>
+      <% else %>
+        <table class="u-full-width">
+          <tbody>
+            <% tube.capsules.each do |capsule| %>
+              <tr class="capsule">
+                <td class="url"><%= link_to capsule.url, capsule.url %></td>
+                <td class="action"><%= icon 'fas', 'copy' %></td>
+                <td class="action">
+                  <%= link_to tube_capsule_path(tube, capsule), method: :delete do %>
+                    <%= icon 'fas', 'times' %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      
+      <%= link_to new_tube_capsule_path(tube), class: 'new-capsule-icon' do %>
+        <%= icon 'fas', 'plus-circle' %><span>New Capsule</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
