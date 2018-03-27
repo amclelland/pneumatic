@@ -1,24 +1,16 @@
-# README
+# Pneumatic
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I find myself trying to store links often that I want to share with others at a later time. This app easily stores the links for later retrieval.
 
-Things you may want to cover:
+![](readme-image.png)
 
-* Ruby version
+## Tubes and Capsules
 
-* System dependencies
+A tube is a queue that stores your individual links (capsules). Create a tube that is used to send to one person or for one purpose and fill it up with as many capsules as you need to. The capsules are stored in a FIFO queue (although you can copy and delete from anywhere). 
 
-* Configuration
+## Todo
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Add user accounts
+* Finish implementing clipboard.js
+* Better front-end for adding tubes/capsules
+* YouTube previews
